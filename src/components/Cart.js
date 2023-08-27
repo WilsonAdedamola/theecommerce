@@ -35,7 +35,7 @@ const Cart = () => {
               <div className="h-[200px]">
                 <img
                   src={item.image}
-                  alt=""
+                  alt="The Store"
                   className="rounded-xl w-full max-h-full"
                 />
               </div>

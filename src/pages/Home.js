@@ -36,7 +36,7 @@ const Home = () => {
               <div className="flex items-center justify-center p-2 shadow-sm h-56">
                 <img
                   src={item.image}
-                  alt="cloth"
+                  alt="The store"
                   className="max-h-full min-h-full max-w-full"
                 />
               </div>
