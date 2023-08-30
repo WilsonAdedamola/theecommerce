@@ -7,10 +7,12 @@ import Women from "./pages/Women";
 import Electronics from "./pages/Electronics";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Cart from "./components/Cart";
+import ProductModal from "./components/ProductModal";
 
 const AppLayout = () => (
   <>
     <Header />
+    <ProductModal />
     <Cart />
     <Outlet />
   </>

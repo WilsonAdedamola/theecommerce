@@ -5,18 +5,31 @@ import { getHomeProducts } from "../redux/fetchdata";
 import Loading from "../components/Loading";
 import { addToCart } from "../redux/addToCart";
 import { toast } from "react-toastify";
+import { populateModal } from "../redux/openModal";
 
 const Home = () => {
   const { data, isLoading, isError } = useSelector((state) => state.fetchAll);
   const { alreadyInCart } = useSelector((state) => state.cartData);
   const dispatch = useDispatch();
 
-  alreadyInCart && toast.error("Item already in cart")
+  alreadyInCart && toast.error("Item already in cart");
 
   useEffect(() => {
     dispatch(getHomeProducts());
-    toast.success("Item already in cart")
   }, []);
+
+  const handleClick = (item) => {
+    dispatch(
+      populateModal({
+        id: item.id,
+        title: item.title,
+        description: item.description,
+        image: item.image,
+        category: item.category,
+        price: item.price,
+      })
+    );
+  };
 
   return (
     <>
@@ -30,10 +43,13 @@ const Home = () => {
         <div className="grid grid-cols-1 gap-4 max-w-[95%] mx-auto mb-10 mt-28 sm:max-w-[80%] sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {data.map((item) => (
             <div
-              className="flex flex-col justify-between rounded-xl cursor-pointer border shadow-md hover:mt-[-8px]"
+              className="flex flex-col justify-between rounded-xl border shadow-md hover:mt-[-8px]"
               key={item.id}
             >
-              <div className="flex items-center justify-center p-2 shadow-sm h-56">
+              <div
+                className="flex items-center justify-center p-2 shadow-sm h-56 cursor-pointer"
+                onClick={()=>handleClick(item)}
+              >
                 <img
                   src={item.image}
                   alt="The store"
@@ -41,7 +57,7 @@ const Home = () => {
                 />
               </div>
               <div className="flex flex-col items-start w-full p-2">
-                <p className="font-semibold mb-3">{item.title}</p>
+                <p className="cursor-pointer" onClick={()=>handleClick(item)}>{item.title}</p>
                 <div className="flex justify-between items-center w-full">
                   <div className="flex items-start flex-col">
                     <span className="font-bold">${item.price}</span>
@@ -59,7 +75,6 @@ const Home = () => {
                             price: item.price,
                           })
                         )
-                        
                       }
                     />
                   </div>

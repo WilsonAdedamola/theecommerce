@@ -1,6 +1,8 @@
 import React from "react";
 import { close } from "../redux/showCart";
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose, AiFillDelete } from "react-icons/ai";
+import { FcDeleteDatabase } from "react-icons/fc";
+import { removeFromCart, clearCart } from "../redux/addToCart";
 import { useDispatch, useSelector } from "react-redux";
 
 const Cart = () => {
@@ -12,7 +14,7 @@ const Cart = () => {
     <div
       className={
         show
-          ? "bg-white text-gray-600 fixed py-2 px-5 right-0 top-0 flex flex-col items-center gap-6 h-full w-[250px] shadow-md lg:w-[500px]"
+          ? "bg-white text-gray-600 fixed py-2 px-5 right-0 top-0 flex flex-col items-center gap-4 h-full w-[270px] shadow-md md:w-[550px]"
           : "hidden right-[-999px]"
       }
     >
@@ -23,31 +25,50 @@ const Cart = () => {
           onClick={() => dispatch(close())}
         />
       </div>
-      {itemCount == 0 ? (
+      {itemCount === 0 ? (
         <h3 className="font-semibold text-xl py-56">Cart is empty</h3>
       ) : (
-        <div className="scroll w-full h-full overflow-y-auto grid gap-4 grid-cols-1 lg:grid-cols-2">
+        <div className="scroll w-full h-full overflow-y-auto grid gap-4 grid-cols-1 md:grid-cols-2">
           {cartItems.map((item) => (
             <div
               key={item.id}
-              className="max-w-[200px] max-h-[300px] p-3 rounded-lg border shadow"
+              className="max-w-[200x] w-full max-h-[430px] p-3 rounded-lg border shadow flex flex-col justify-between bg-white"
             >
               <div className="h-[200px]">
                 <img
                   src={item.image}
                   alt="The Store"
-                  className="rounded-xl w-full max-h-full"
+                  className="rounded-xl w-full max-h-full h-full"
                 />
               </div>
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col items-center justify-between">
                 <div>
-                  <p className="w-[100%] overflow-x-scroll">{item.title}</p>
-                  <p>{item.price}</p>
+                  <p className="w-[100%] font-semibold mb-2">{item.title}</p>
+                  <p>${item.price}</p>
                 </div>
-                <div className="cursor-pointer">delete</div>
+                <div
+                  className="text-white rounded-sm w-full bg-[#7694A9] cursor-pointer mt-1 flex py-1 px-3 items-center justify-between hover:bg-[#B4D0E2]"
+                  onClick={() => {
+                    dispatch(removeFromCart(item.id));
+                  }}
+                >
+                  <p className="text-base">Remove from cart</p>
+                  <AiFillDelete />
+                </div>
               </div>
             </div>
           ))}
+        </div>
+      )}
+      {itemCount !== 0 && (
+        <div className="gap-4 cursor-pointer bg-[#FF0000] rounded flex justify-between items-center py-1 px-3 hover:bg-[#f56b6b]">
+          <p
+            className="text-white font-semibold"
+            onClick={() => dispatch(clearCart())}
+          >
+            Clear Cart
+          </p>
+          <FcDeleteDatabase />
         </div>
       )}
     </div>

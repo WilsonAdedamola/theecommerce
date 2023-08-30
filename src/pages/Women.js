@@ -1,23 +1,26 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from "react";
 import { RiShoppingCartFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../components/Loading";
 import { getWomenProducts } from "../redux/fetchWomenData";
+import { addToCart } from "../redux/addToCart";
 
 const Women = () => {
-
   const { data, isLoading, isError } = useSelector((state) => state.fetchWomen);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getWomenProducts())
+    dispatch(getWomenProducts());
   }, []);
-
 
   return (
     <>
       {isLoading && <Loading />}
-      {isError&& <div className="flex items-center justify-center min-h-[600px] font-semibold text-xl">Unable to fetch products</div>}
+      {isError && (
+        <div className="flex items-center justify-center min-h-[600px] font-semibold text-xl">
+          Unable to fetch products
+        </div>
+      )}
       {!isLoading && data.length ? (
         <div className="grid grid-cols-1 gap-4 max-w-[95%] mt-28 mx-auto my-10 sm:max-w-[80%] sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {data.map((item) => (
@@ -40,7 +43,19 @@ const Women = () => {
                     <span className="text-slate-400">{item.category}</span>
                   </div>
                   <div className="cart">
-                    <RiShoppingCartFill className="text-2xl cursor-pointer" />
+                    <RiShoppingCartFill
+                      className="text-2xl cursor-pointer"
+                      onClick={() =>
+                        dispatch(
+                          addToCart({
+                            id: item.id,
+                            title: item.title,
+                            image: item.image,
+                            price: item.price,
+                          })
+                        )
+                      }
+                    />
                   </div>
                 </div>
               </div>
@@ -49,7 +64,7 @@ const Women = () => {
         </div>
       ) : null}
     </>
-  )
-}
+  );
+};
 
-export default Women
+export default Women;

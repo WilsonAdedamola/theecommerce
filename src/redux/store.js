@@ -6,7 +6,7 @@ import fetchJewelryData from "./fetchJewelryData";
 import fetchElectronicsData from "./fetchElectronicsData";
 import showCart from "./showCart";
 import addToCart from "./addToCart";
-
+import openModal from "./openModal";
 
 
 
@@ -19,5 +19,6 @@ export const store = configureStore({
         fetchElectronics : fetchElectronicsData,
         cartState : showCart,
         cartData : addToCart,
+        modalData : openModal,
     }
 }) 

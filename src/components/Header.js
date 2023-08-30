@@ -58,8 +58,10 @@ const Header = () => {
 
 function MobileHeader() {
   const [dropDown, setDropDown] = useState(false);
+  const [mobileActive, setMobileActive] = useState(0);
 
-  const handleClick = () => {
+  const handleClick = (id) => {
+    setMobileActive(id);
     setDropDown(false);
     window.scroll({
       top: 0,
@@ -76,7 +78,13 @@ function MobileHeader() {
       <div className="flex gap-5">
         <div className="flex flex-col gap-2 items-center relative">
           <div className="flex items-center justify-center gap-1 border-2 rounded-lg px-3 py-1 text-sm cursor-pointer">
-            <p onClick={() => setDropDown((prev) => !prev)}>Categories</p>
+            <p onClick={() => setDropDown((prev) => !prev)}>
+              {mobileActive === 0 && "Home"}
+              {mobileActive === 2 && "Men"}
+              {mobileActive === 3 && "Women"}
+              {mobileActive === 4 && "Jewelry"}
+              {mobileActive === 5 && "Electronics"}
+            </p>
             {!dropDown ? (
               <MdKeyboardArrowDown
                 className="mt-1"
@@ -91,21 +99,21 @@ function MobileHeader() {
           </div>
           {dropDown && (
             <div className="absolute top-11 flex flex-col items-center gap-1 bg-white border-2 rounded-lg p-3 w-full h-auto">
-              <Link to="/" onClick={handleClick}>
+              <Link to="/" onClick={() => handleClick(0)}>
                 <p className="text-sm hover:text-gray-950 md:text-xl">Home</p>
               </Link>
-              <Link to="men" onClick={handleClick}>
+              <Link to="men" onClick={() => handleClick(2)}>
                 <p className="text-sm hover:text-gray-950 md:text-xl">Men</p>
               </Link>
-              <Link to="women" onClick={handleClick}>
+              <Link to="women" onClick={() => handleClick(3)}>
                 <p className="text-sm hover:text-gray-950 md:text-xl">Women</p>
               </Link>
-              <Link to="jewelry" onClick={handleClick}>
+              <Link to="jewelry" onClick={() => handleClick(4)}>
                 <p className="text-sm hover:text-gray-950 md:text-xl">
                   Jewelry
                 </p>
               </Link>
-              <Link to="electronics" onClick={handleClick}>
+              <Link to="electronics" onClick={() => handleClick(5)}>
                 <p className="text-sm hover:text-gray-950 md:text-xl">
                   Electronics
                 </p>
