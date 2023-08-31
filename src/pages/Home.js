@@ -48,7 +48,7 @@ const Home = () => {
             >
               <div
                 className="flex items-center justify-center p-2 shadow-sm h-56 cursor-pointer"
-                onClick={()=>handleClick(item)}
+                onClick={() => handleClick(item)}
               >
                 <img
                   src={item.image}
@@ -57,7 +57,9 @@ const Home = () => {
                 />
               </div>
               <div className="flex flex-col items-start w-full p-2">
-                <p className="cursor-pointer" onClick={()=>handleClick(item)}>{item.title}</p>
+                <p className="cursor-pointer" onClick={() => handleClick(item)}>
+                  {item.title}
+                </p>
                 <div className="flex justify-between items-center w-full">
                   <div className="flex items-start flex-col">
                     <span className="font-bold">${item.price}</span>

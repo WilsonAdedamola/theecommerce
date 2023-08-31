@@ -1,44 +1,79 @@
 import React, { useState } from "react";
 import { RiShoppingCartFill } from "react-icons/ri";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { open } from "../redux/showCart";
 import { useDispatch, useSelector } from "react-redux";
-// import Cart from "./Cart";
 
 const Header = () => {
   const dispatch = useDispatch();
-  // const { show } = useSelector((state) => state.cartState);
+  const location = useLocation();
 
   return (
     <>
       <div className="bg-white text-gray-600 shadow fixed top-0 w-full">
         {MobileHeader()}
         <div className="max-w-[90%] mx-auto py-4 justify-between items-center hidden sm:flex ">
-          <Link to="/">
+          <NavLink to="/">
             <div className="text-3xl font-bold md:text-4xl">The Store</div>
-          </Link>
+          </NavLink>
           <div className="flex gap-6 justify-between items-center">
             <div className="flex gap-2">
-              <Link to="/">
-                <p className="text-sm hover:text-gray-950 md:text-xl">Home</p>
-              </Link>
-              <Link to="men">
-                <p className="text-sm hover:text-gray-950 md:text-xl">Men</p>
-              </Link>
-              <Link to="women">
-                <p className="text-sm hover:text-gray-950 md:text-xl">Women</p>
-              </Link>
-              <Link to="jewelry">
-                <p className="text-sm hover:text-gray-950 md:text-xl">
+              <NavLink to="/">
+                <p
+                  className={
+                    location.pathname === "/"
+                      ? "text-sm text-gray-950 font-bold md:text-xl"
+                      : "text-sm hover:text-gray-950 md:text-xl"
+                  }
+                >
+                  Home
+                </p>
+              </NavLink>
+              <NavLink to="men">
+                <p
+                  className={
+                    location.pathname === "/men"
+                      ? "text-sm text-gray-950 font-bold md:text-xl"
+                      : "text-sm hover:text-gray-950 md:text-xl"
+                  }
+                >
+                  Men
+                </p>
+              </NavLink>
+              <NavLink to="women">
+                <p
+                  className={
+                    location.pathname === "/women"
+                      ? "text-sm text-gray-950 font-bold md:text-xl"
+                      : "text-sm hover:text-gray-950 md:text-xl"
+                  }
+                >
+                  Women
+                </p>
+              </NavLink>
+              <NavLink to="jewelry">
+                <p
+                  className={
+                    location.pathname === "/jewelry"
+                      ? "text-sm text-gray-950 font-bold md:text-xl"
+                      : "text-sm hover:text-gray-950 md:text-xl"
+                  }
+                >
                   Jewelry
                 </p>
-              </Link>
-              <Link to="electronics">
-                <p className="text-sm hover:text-gray-950 md:text-xl">
+              </NavLink>
+              <NavLink to="electronics">
+                <p
+                  className={
+                    location.pathname === "/electronics"
+                      ? "text-sm text-gray-950 font-bold md:text-xl"
+                      : "text-sm hover:text-gray-950 md:text-xl"
+                  }
+                >
                   Electronics
                 </p>
-              </Link>
+              </NavLink>
             </div>
             <div className="font-bold text-2xl hover:text-gray-950">
               <RiShoppingCartFill
@@ -49,7 +84,6 @@ const Header = () => {
           </div>
         </div>
       </div>
-      {/* {show && <Cart />} */}
     </>
   );
 };
@@ -59,6 +93,8 @@ const Header = () => {
 function MobileHeader() {
   const [dropDown, setDropDown] = useState(false);
   const [mobileActive, setMobileActive] = useState(0);
+  const dispatch = useDispatch();
+
 
   const handleClick = (id) => {
     setMobileActive(id);
@@ -77,8 +113,11 @@ function MobileHeader() {
       </Link>
       <div className="flex gap-5">
         <div className="flex flex-col gap-2 items-center relative">
-          <div className="flex items-center justify-center gap-1 border-2 rounded-lg px-3 py-1 text-sm cursor-pointer">
-            <p onClick={() => setDropDown((prev) => !prev)}>
+          <div className="flex items-center justify-between gap-1 border-2 rounded-lg px-3 py-1 text-sm cursor-pointer max-w-[7rem] min-w-[5rem]">
+            <p
+              className="font-semibold"
+              onClick={() => setDropDown((prev) => !prev)}
+            >
               {mobileActive === 0 && "Home"}
               {mobileActive === 2 && "Men"}
               {mobileActive === 3 && "Women"}
@@ -122,7 +161,10 @@ function MobileHeader() {
           )}
         </div>
         <div className="font-bold text-2xl hover:text-gray-950">
-          <RiShoppingCartFill className="text-3xl cursor-pointer" />
+          <RiShoppingCartFill
+            className="text-3xl cursor-pointer"
+            onClick={() => dispatch(open())}
+          />
         </div>
       </div>
     </div>

@@ -23,7 +23,10 @@ const ProductModal = () => {
         close
       </div>
       {modalItem.map((item) => (
-        <div key={item.id} className="w-full flex gap-3 flex-col text-gray-600 justify-between items-center bg-white h-full sm:flex-row">
+        <div
+          key={item.id}
+          className="w-full flex gap-3 flex-col text-gray-600 justify-between items-center bg-white h-full sm:flex-row"
+        >
           <div className="flex items-center justify-center w-full md:w-[45%] flex-1">
             <img src={item.image} alt="Product" className="w-[40vw] h-full" />
           </div>
