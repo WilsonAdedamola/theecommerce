@@ -12,7 +12,7 @@ const ProductModal = () => {
     <div
       className={
         isTrue
-          ? "flex items-center justify-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-2 shadow-xl rounded-md bg-white w-[92vw] h-[90vh] md:w-[70vw] lg:w-[60vw]"
+          ? "flex items-center justify-center fixed z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-2 shadow-xl rounded-md bg-white w-[92vw] h-[90vh] md:w-[70vw] lg:w-[60vw]"
           : "hidden"
       }
     >

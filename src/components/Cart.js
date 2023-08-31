@@ -14,8 +14,8 @@ const Cart = () => {
     <div
       className={
         show
-          ? "bg-white text-gray-600 fixed py-2 px-5 right-0 top-0 flex flex-col items-center gap-4 h-full w-[270px] shadow-md md:w-[550px]"
-          : "hidden right-[-999px]"
+          ? "bg-white text-gray-600 fixed opacity-1 duration-700 z-10 py-2 px-5 right-0 top-0 flex flex-col items-center gap-4 h-full w-[270px] shadow md:w-[550px]"
+          : "fixed opacity-0 -right-[9999px] duration-500"
       }
     >
       <div className="flex justify-between items-center w-full">

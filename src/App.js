@@ -8,6 +8,7 @@ import Electronics from "./pages/Electronics";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Cart from "./components/Cart";
 import ProductModal from "./components/ProductModal";
+import Attribute from "./components/Attribute";
 
 const AppLayout = () => (
   <>
@@ -15,6 +16,7 @@ const AppLayout = () => (
     <ProductModal />
     <Cart />
     <Outlet />
+    <Attribute />
   </>
 );
 function App() {

@@ -10,6 +10,9 @@ import { populateModal } from "../redux/openModal";
 const Home = () => {
   const { data, isLoading, isError } = useSelector((state) => state.fetchAll);
   const { alreadyInCart } = useSelector((state) => state.cartData);
+  const { isTrue } = useSelector((state) => state.modalData);
+  const { show } = useSelector((state) => state.cartState);
+
   const dispatch = useDispatch();
 
   alreadyInCart && toast.error("Item already in cart");
@@ -31,6 +34,8 @@ const Home = () => {
     );
   };
 
+  isTrue || show ? document.body.style.overflow = "hidden" : document.body.style.overflow = "auto"
+
   return (
     <>
       {isLoading && <Loading />}
@@ -40,7 +45,13 @@ const Home = () => {
         </div>
       )}
       {!isLoading && data.length ? (
-        <div className="grid grid-cols-1 gap-4 max-w-[95%] mx-auto mb-10 mt-28 sm:max-w-[80%] sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div
+          className={
+            isTrue || show
+              ? "blur-lg pointer-events-none select-none grid grid-cols-1 gap-4 max-w-[95%] mx-auto mb-10 mt-28 sm:max-w-[80%] sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+              : "grid grid-cols-1 gap-4 max-w-[95%] mx-auto mb-10 mt-28 sm:max-w-[80%] sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+          }
+        >
           {data.map((item) => (
             <div
               className="flex flex-col justify-between rounded-xl border shadow-md hover:mt-[-8px]"

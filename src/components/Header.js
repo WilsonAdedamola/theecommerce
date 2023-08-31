@@ -8,10 +8,18 @@ import { useDispatch, useSelector } from "react-redux";
 const Header = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const { isTrue } = useSelector((state) => state.modalData);
+  const { show } = useSelector((state) => state.cartState);
 
   return (
     <>
-      <div className="bg-white text-gray-600 shadow fixed top-0 w-full">
+      <div
+        className={
+          isTrue || show
+            ? "blur-lg pointer-events-none select-none bg-white text-gray-600 shadow fixed top-0 w-full"
+            : "bg-white text-gray-600 shadow fixed top-0 w-full"
+        }
+      >
         {MobileHeader()}
         <div className="max-w-[90%] mx-auto py-4 justify-between items-center hidden sm:flex ">
           <NavLink to="/">
@@ -94,7 +102,8 @@ function MobileHeader() {
   const [dropDown, setDropDown] = useState(false);
   const [mobileActive, setMobileActive] = useState(0);
   const dispatch = useDispatch();
-
+  const { isTrue } = useSelector((state) => state.modalData);
+  const { show } = useSelector((state) => state.cartState);
 
   const handleClick = (id) => {
     setMobileActive(id);
@@ -107,7 +116,13 @@ function MobileHeader() {
   };
 
   return (
-    <div className="flex justify-between max-w-[95%] mx-auto py-2 sm:hidden">
+    <div
+      className={
+        isTrue || show
+          ? "blur-lg pointer-events-none select-none flex justify-between max-w-[95%] mx-auto py-2 sm:hidden"
+          : "flex justify-between max-w-[95%] mx-auto py-2 sm:hidden"
+      }
+    >
       <Link to="/">
         <div className="text-xl font-semibold">The Store</div>
       </Link>
