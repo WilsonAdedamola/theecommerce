@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
 
 const initialState = {
   cartItems: [],
@@ -23,6 +22,7 @@ const cartSlice = createSlice({
             image: action.payload.image,
             price: action.payload.price,
         });
+        window.alert("Item added to cart")
       }
       state.itemCount+=1 
     },

@@ -124,7 +124,7 @@ function MobileHeader() {
       }
     >
       <Link to="/">
-        <div className="text-xl font-semibold">The Store</div>
+        <div className="text-xl font-semibold" onClick={()=>setMobileActive(0)}>The Store</div>
       </Link>
       <div className="flex gap-5">
         <div className="flex flex-col gap-2 items-center relative">
